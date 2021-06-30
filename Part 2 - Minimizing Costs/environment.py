@@ -77,12 +77,12 @@ class Environment(object):
             self.current_number_users = self.max_number_users
             
         # Actualizar la tasa de transferencia de datos
-        self.current_rate_data += np.random.randint(-self.max_update_rate, self.max_update_rate)
+        self.current_rate_data += np.random.randint(-self.max_update_data, self.max_update_data)
         
         if self.current_rate_data < self.min_rate_data:
             self.current_rate_data = self.min_rate_data
-        elif self.current_rate_data > self.max_update_rate:
-            self.current_rate_data = self.max_update_rate
+        elif self.current_rate_data > self.max_rate_data:
+            self.current_rate_data = self.max_rate_data
         
         # Calcular la variación de temperatura intrínseca
         past_intrinsic_temperature = self.intrinsec_temperature         
@@ -156,7 +156,7 @@ class Environment(object):
         scaled_temperature_ai = (self.temperature_ai - self.min_temperature) / (self.max_temperature - self.min_temperature)
         scaled_number_users = (self.current_number_users - self.min_number_users) / (self.max_number_users - self.min_number_users)
         scaled_rate_data = (self.current_rate_data - self.min_rate_data) / (self.max_rate_data - self.min_rate_data)
-        current_state = np.array([scaled_temperature_ai, scaled_number_users, scaled_rate_data])
+        current_state = np.array([[scaled_temperature_ai, scaled_number_users, scaled_rate_data]])
         
         # Commented beacuse of future deprecation
         #current_state = np.matrix([scaled_temperature_ai, scaled_number_users, scaled_rate_data])
